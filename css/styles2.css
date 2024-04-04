@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.sidebar {
+    width: 10%;
+    height: 100%;
+    background-color: #324990;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.logo {
+    margin-top: 20px;
+}
+
+.menu {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin: 10px;
+}
