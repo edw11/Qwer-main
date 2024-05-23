@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+   <title>Reservation</title>
+    <link rel="stylesheet" href="/styles/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <nav>
+      <div class="logo" >S-Readers</div>
+      <input type="checkbox" id="click">
+      <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+        <li><a  href="/admin-data">사용자</a></li>
+        <li><a  class="active" href="/current">현재 상황</a></li>
+        <li><a href="/admin-logout">로그아웃</a></li>
+      </ul>
+    </nav>
+      <div class="wrapper">
+        <h1>현재 상황</h1>
+        <form id="reservation-form" action="/nextAdmin" method="post">
+            <select id="time-select" name="selectedTime">
+                <option value="" selected disabled>시간을 선택해주세요</option>
+                <option value="time1">9.00 ~ 10.00</option>
+                <option value="time2">10.00 ~ 11.00</option>
+                <option value="time3">11.00 ~ 12.00</option>
+                <option value="time4">12.00 ~ 13.00</option>
+                <option value="time5">13.00 ~ 14.00</option>
+                <option value="time6">14.00 ~ 15.00</option>
+                <option value="time7">15.00 ~ 16.00</option>
+                <option value="time8">16.00 ~ 17.00</option>
+                <option value="time9">17.00 ~ 18.00</option>
+                <option value="time10">18.00 ~ 19.00</option>
+                <option value="time11">19.00 ~ 20.00</option>
+                <option value="time12">20.00 ~ 21.00</option>
+            </select>
+            <select id="room-select" name="selectedRoom">
+                <option value="" selected disabled>열람실 선택</option>
+                <option value="대열람실">대열람실</option>
+                <option value="소열람실">소열람실 1</option>
+                <option value="소열람실">소열람실 2</option>
+            </select>
+            <button type="submit" id="next-btn">다음</button>
+        </form>
+        
+    </div>
+    <script>
+
+
+  </script>
+  
+  </body>
+</html>

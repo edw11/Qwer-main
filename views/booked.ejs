@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+   <title>Reservation</title>
+    <link rel="stylesheet" href="styles/booked.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <nav>
+      <div class="logo" >S-Readers</div>
+      <input type="checkbox" id="click">
+      <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+        <li><a class="active" href="/home">예약</a></li>
+        <li><a href="/history">예약 내역</a></li>
+        <li><a href="/profile">내 프로필</a></li>
+        <li><a href="/logout">로그아웃</a></li>
+      </ul>
+    </nav>
+      <div class="wrapper">
+        <h1>Reserved</h1>
+        <form id="reservation-form" action="/cancel" method="post">
+          <div class="information">
+            <h3>Room: <%= room %></h3>
+            <h3>Seat: <%= seat %></h3>
+            <h3>Start Time: <%=start_time %></h3>
+            <h3>End Time: <%= end_time %></h3>
+          </div>
+            <button type="submit" id="next-btn">Cancel</button>
+        </form>
+    </div>
+    <script>
+
+document.getElementById("reservation-form").addEventListener("submit", function(event) {
+        var timeSelect = document.getElementById("time-select");
+        var roomSelect = document.getElementById("room-select");
+
+        if (timeSelect.value === "" || roomSelect.value === "") {
+            event.preventDefault(); // Prevent form submission
+            alert("Please select both time and room."); // Display an error message
+        }
+    });
+
+      document.addEventListener("DOMContentLoaded", function () {
+          // Get current hour
+          var currentHour = new Date().getHours();
+  
+          // Select the time select element
+          var timeSelect = document.getElementById("time-select");
+  
+          // Loop through each option and remove options before current time
+          for (var i = timeSelect.options.length - 1; i >= 0; i--) {
+              var optionHour = parseInt(timeSelect.options[i].textContent.split(" ~ ")[0]);
+              if (optionHour < currentHour) {
+                  timeSelect.remove(i);
+              }
+          }
+      });
+  </script>
+  
+  </body>
+</html>

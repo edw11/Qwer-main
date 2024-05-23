@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  <link rel="stylesheet" href="/styles/booking.css">
+  <title>Ticket Booking</title>
+</head>
+<body>
+  <nav>
+    <div class="logo" >S-Readers</div>
+    <input type="checkbox" id="click">
+    <label for="click" class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <ul>
+        <li><a  href="/admin-data">예약 내역</a></li>
+        <li><a class="active" href="/current">현제 상황</a></li>
+        <li><a href="/admin-logout">로그아웃</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <h1 class="title">현제 상황</h1>
+    <div class="status">
+      <div class="status-container available">
+        <div class="status-box"></div>
+        <h3>available</h3>
+      </div>
+
+      <div class="status-container reserved">
+        <div class="status-box"></div>
+        <h3>reserved</h3>
+      </div>
+    </div>
+    <div class="container1">
+      <div class="container2">
+        <div class="box" id="seat1">
+          <p> 1</p>
+        </div>
+        <div class="box" id="seat2">
+          <p> 2</p>
+        </div>
+        <div class="box" id="seat3">
+          <p> 3</p>
+        </div>
+        <div class="box" id="seat4">
+          <p> 4</p>
+        </div>
+  
+        <div class="box" id="seat5">
+          <p> 5</p>
+        </div>
+        <div class="box" id="seat6">
+          <p> 6</p>
+        </div>
+        <div class="box" id="seat7">
+          <p> 7</p>
+        </div>
+        <div class="box" id="seat8">
+          <p> 8</p>
+        </div>
+      </div>
+  
+      <div class="container2">
+        <div class="box" id="seat9">
+          <p> 9</p>
+        </div>
+        <div class="box" id="seat10">
+          <p> 10</p>
+        </div>
+        <div class="box" id="seat11">
+          <p> 11</p>
+        </div>
+        <div class="box" id="seat12">
+          <p> 12</p>
+        </div>
+  
+        <div class="box" id="seat13">
+          <p> 13</p>
+        </div>
+  
+        <div class="box" id="seat14">
+          <p> 14</p>
+        </div>
+        <div class="box" id="seat15">
+          <p> 15</p>
+        </div>
+        <div class="box" id="seat16">
+          <p> 16</p>
+        </div>
+      </div>
+  
+      <div class="container2">
+        <div class="box" id="seat17">
+          <p> 17</p>
+        </div>
+        <div class="box" id="seat18">
+          <p>18</p>
+        </div>
+        <div class="box" id="seat19">
+          <p> 19</p>
+        </div>
+        <div class="box" id="seat20">
+          <p> 20</p>
+        </div>
+  
+        <div class="box" id="seat21">
+          <p> 21</p>
+        </div>
+        <div class="box" id="seat22">
+          <p> 22</p>
+        </div>
+        <div class="box" id="seat23">
+          <p> 23</p>
+        </div>
+        <div class="box" id="seat24">
+          <p> 24</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const seatNumber = "<%=seats%>".split(",");
+    seatNumber.forEach(code => {
+      const seatOption = document.querySelector(`option[value="${code}"]`);
+      if (seatOption) {
+        seatOption.remove(); // Remove the option for the selected seat
+      }
+      document.getElementById("seat" + code).style.backgroundColor = "#35498E";
+      document.getElementById("seat" + code).style.color = "white";
+    });
+  });
+        
+       
+  </script>
+</body>
+</html>

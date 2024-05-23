@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="/styles/history.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">S-Readers</div>
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
+        <ul>
+          <li><a class="active" href="/admin-data">사용자</a></li>
+          <li><a  href="/current">현재 상황</a></li>
+          <li><a href="/admin-logout">로그아웃</a></li>
+        </ul>
+      </nav>
+
+    <div class="container light-style flex-grow-1 container-p-y">
+      <h4 class="font-weight-bold py-3 mb-4">사용자 정보</h4>
+      
+      <div class="card overflow-hidden">
+          <div class="row no-gutters row-bordered row-border-light">
+              <table id="historyTable" class="table">
+                  <thead>
+                      <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Student Number</th>
+                          <th scope="col">Major</th>
+                      </tr>
+                  </thead>
+                  <tbody id="historyBody">
+                      <% data.reverse().forEach((data, index) => { %>
+                          <tr>
+                              <td><%= index + 1 %></td>
+                              <td><%= data.email %></td>
+                              <td><%= data.studentnumber %></td>
+                              <td><%= data.major %></td>
+                          </tr>
+                      <% }); %>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+
+    <script>
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,307 @@
+
+app.post("/confirm", async (req,res)=>{
+    let status = 1
+    let userStatus = "Active"
+    const result = req.body
+    const user = req.user.id
+    // Get the current time
+    const startTime = new Date();
+
+    // Calculate the end time (+60 minutes from the start time)
+    const endTime = new Date(startTime.getTime() + 60 * 60000); // 60 minutes * 60 seconds * 1000 milliseconds
+
+    // Extract hours and minutes for start time
+    const startHours = startTime.getHours();
+    const startMinutes = startTime.getMinutes();
+
+    // Extract hours and minutes for end time
+    const endHours = endTime.getHours();
+    const endMinutes = endTime.getMinutes();
+    const startTimeFinal = startHours + ":" + (startMinutes < 10 ? "0" : "") + startMinutes
+    const endTimeFinal = endHours + ":" + (endMinutes < 10 ? "0" : "") + endMinutes
+    try{
+        const seat = await db.query(`UPDATE seat SET ${tempTime} = $1 WHERE seat_number = $2`, [status, req.body.seatNumber]);
+        const history = await db.query("INSERT INTO history (room, seat_number, start_time, end_time, status, user_id) VALUES ($1,$2,$3,$4,$5,$6)", [room,req.body.seatNumber,startTimeFinal, endTimeFinal, userStatus, user])
+        res.redirect("/history")
+    }catch(err){
+        console.log(err)
+    }
+
+})
+
+// app.post(
+//     "/login",
+//     passport.authenticate("local", {
+//       successRedirect: "/home",
+//       failureRedirect: "/login"
+//     })
+//   );
+
+<!--     
+    <div class="wrapper">
+        <h1>예약</h1>
+        <form>
+          <select>
+            <option value="" selected disabled>시간 선택해주세요</option>
+            <option value="time1">9.00 ~ 10.00</option>
+            <option value="time2">10.00 ~ 11.00</option>
+            <option value="time3">12.00 ~ 13.00</option>
+            <option value="time4">13.00 ~ 14.00</option>
+            <option value="time5">14.00 ~ 15.00</option>
+            <option value="time6">15.00 ~ 16.00</option>
+            <option value="time7">17.00 ~ 18.00</option>
+        </select>
+          <select>
+            <option value="" selected disabled>열람실 선택</option>
+            <option value="bigroom">대열람실</option>
+            <option value="smallroom1">소열람실 1</option>
+            <option value="smallroom2">소열람실 2</option>
+           
+        </select>
+        </form>
+        <button>다음</button>
+      </div> -->
+
+
+      // app.post("/confirm", async (req, res) => {
+//     let status = 1;
+//     let userStatus = "Active";
+//     const result = req.body;
+//     const user = req.user.id;
+
+//     // Get the current time
+//     const startTime = new Date();
+
+//     // Calculate the end time (+60 minutes from the start time) and round it up to the next hour
+//     const endTime = new Date(startTime);
+//     endTime.setHours(endTime.getHours() + 1);
+//     endTime.setMinutes(0);
+//     endTime.setSeconds(0);
+
+//     // Extract hours and minutes for start time
+//     const startHours = startTime.getHours();
+//     const startMinutes = startTime.getMinutes();
+
+//     // Extract hours and minutes for end time
+//     const endHours = endTime.getHours();
+//     const endMinutes = endTime.getMinutes();
+
+//     const startTimeFinal = startHours + ":" + (startMinutes < 10 ? "0" : "") + startMinutes;
+//     const endTimeFinal = endHours + ":" + (endMinutes < 10 ? "0" : "") + endMinutes;
+
+//     try {
+//         // Assuming tempTime is defined somewhere, otherwise replace it with the correct value
+//         const seat = await db.query(`UPDATE seat SET ${tempTime} = $1 WHERE seat_number = $2`, [status, req.body.seatNumber]);
+//         const history = await db.query("INSERT INTO history (room, seat_number, start_time, end_time, status, user_id) VALUES ($1, $2, $3, $4, $5, $6)", [room, req.body.seatNumber, startTimeFinal, endTimeFinal, userStatus, user]);
+//         res.redirect("/history");
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).send("Error occurred");
+//     }
+// });
+
+
+
+
+home
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+   <title>Reservation</title>
+    <link rel="stylesheet" href="/styles/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <nav>
+      <div class="logo" >S-Readers</div>
+      <input type="checkbox" id="click">
+      <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+        <li><a class="active" href="/home">예약</a></li>
+        <li><a href="/history">예약 내역</a></li>
+        <li><a href="/profile">내 프로필</a></li>
+        <li><a href="/logout">로그아웃</a></li>
+      </ul>
+    </nav>
+      <div class="wrapper">
+        <h1>예약</h1>
+        <form id="reservation-form" action="/next" method="post">
+            <select id="time-select" name="selectedTime">
+                <option value="" selected disabled>시간 선택해주세요</option>
+                <option value="time1">9.00 ~ 10.00</option>
+                <option value="time2">10.00 ~ 11.00</option>
+                <option value="time3">12.00 ~ 13.00</option>
+                <option value="time4">13.00 ~ 14.00</option>
+                <option value="time5">14.00 ~ 15.00</option>
+                <option value="time6">15.00 ~ 16.00</option>
+                <option value="time7">17.00 ~ 18.00</option>
+                <option value="time8">18.00 ~ 19.00</option>
+                <option value="time9">19.00 ~ 20.00</option>
+                <option value="time10">20.00 ~ 21.00</option>
+                <option value="time11">21.00 ~ 22.00</option>
+                <option value="time12">22.00 ~ 23.00</option>
+            </select>
+            <select id="room-select" name="selectedRoom">
+                <option value="" selected disabled>열람실 선택</option>
+                <option value="대열람실">대열람실</option>
+                <option value="소열람실">소열람실 1</option>
+                <option value="소열람실">소열람실 2</option>
+            </select>
+            <button type="submit" id="next-btn">다음</button>
+        </form>
+        
+    </div>
+    <script>
+
+document.getElementById("reservation-form").addEventListener("submit", function(event) {
+        var timeSelect = document.getElementById("time-select");
+        var roomSelect = document.getElementById("room-select");
+
+        if (timeSelect.value === "" || roomSelect.value === "") {
+            event.preventDefault(); // Prevent form submission
+            alert("Please select both time and room."); // Display an error message
+        }
+    });
+
+      document.addEventListener("DOMContentLoaded", function () {
+          // Get current hour
+          var currentHour = new Date().getHours();
+  
+          // Select the time select element
+          var timeSelect = document.getElementById("time-select");
+  
+          // Loop through each option and remove options before current time
+          for (var i = timeSelect.options.length - 1; i >= 0; i--) {
+              var optionHour = parseInt(timeSelect.options[i].textContent.split(" ~ ")[0]);
+              if (optionHour < currentHour) {
+                  timeSelect.remove(i);
+              }
+          }
+      });
+  </script>
+  
+  </body>
+</html>
+
+home2
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Reservation</title>
+  <link rel="stylesheet" href="/styles/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<nav>
+  <div class="logo" >S-Readers</div>
+  <input type="checkbox" id="click">
+  <label for="click" class="menu-btn">
+    <i class="fas fa-bars"></i>
+  </label>
+  <ul>
+    <li><a class="active" href="/home">예약</a></li>
+    <li><a href="/history">예약 내역</a></li>
+    <li><a href="/profile">내 프로필</a></li>
+    <li><a href="/logout">로그아웃</a></li>
+  </ul>
+</nav>
+<div class="wrapper">
+  <h1>예약</h1>
+  <form id="reservation-form" action="/next" method="post">
+    <select id="time-select" name="selectedTime">
+      <option value="" selected disabled>시간 선택해주세요</option>
+      <option value="time1">9.00 ~ 10.00</option>
+      <option value="time2">10.00 ~ 11.00</option>
+      <option value="time3">12.00 ~ 13.00</option>
+      <option value="time4">13.00 ~ 14.00</option>
+      <option value="time5">14.00 ~ 15.00</option>
+      <option value="time6">15.00 ~ 16.00</option>
+      <option value="time7">17.00 ~ 18.00</option>
+      <option value="time8">18.00 ~ 19.00</option>
+      <option value="time9">19.00 ~ 20.00</option>
+      <option value="time10">20.00 ~ 21.00</option>
+      <option value="time11">21.00 ~ 22.00</option>
+      <option value="time12">22.00 ~ 23.00</option>
+    </select>
+    <select id="room-select" name="selectedRoom">
+      <option value="" selected disabled>열람실 선택</option>
+      <option value="대열람실">대열람실</option>
+      <option value="소열람실">소열람실 1</option>
+      <option value="소열람실">소열람실 2</option>
+    </select>
+    <button type="submit" id="next-btn">다음</button>
+  </form>
+</div>
+<script>
+  document.getElementById("reservation-form").addEventListener("submit", function(event) {
+    var timeSelect = document.getElementById("time-select");
+    var roomSelect = document.getElementById("room-select");
+
+    if (timeSelect.value === "" || roomSelect.value === "") {
+      event.preventDefault(); // Prevent form submission
+      alert("Please select both time and room."); // Display an error message
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get current hour
+    var currentHour = new Date().getHours();
+
+    // Select the time select element
+    var timeSelect = document.getElementById("time-select");
+
+    // Loop through each option and remove options before current time
+    for (var i = timeSelect.options.length - 1; i >= 0; i--) {
+      var optionHour = parseInt(timeSelect.options[i].textContent.split(" ~ ")[0]);
+      if ( optionHour > currentHour) {
+        timeSelect.remove(i);
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+<!-- <div class="container light-style flex-grow-1 container-p-y">
+        <h4 class="font-weight-bold py-3 mb-4">
+            Reservation History
+        </h4>
+        
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <table id="historyTable" class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Room</th>
+                        <th scope="col">Seat number</th>
+                        <th scope="col">Start time</th>
+                        <th scope="col">End time</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                      <% data.forEach((record, index) => { %>
+                        <tr>
+                          <td><%= index + 1 %></td>
+                          <td><%= record.room %></td>
+                          <td><%= record.seat_number %></td>
+                          <td><%= record.start_time %></td>
+                          <td><%= record.end_time %></td>
+                          <td><%= record.status %></td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div> -->
