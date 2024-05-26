@@ -120,7 +120,7 @@ body {
 
 #go-back {
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 30px;
     color: #0056b3; /* Adjust color as needed */
     text-decoration: none;
@@ -134,4 +134,33 @@ body {
 .notification{
     text-align: center;
     color: red;
+}
+
+
+@media (max-width: 1000px) {
+    .login-container {
+        padding: 60px 40px; /* Reduce padding for smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        padding: 40px 40px; /* Further reduce padding for smaller screens */
+    }
+
+    .login-btn {
+        padding: 8px 100px; /* Adjust button padding for smaller screens */
+    }
+	
+	 #go-back {
+        top: 5px;
+        font-size: small;
+    }
+	 h2{
+        font-size: 20px;
+    }
+
+    .form-group input {
+        width: calc(100% - 20px); /* Adjust input width for smaller screens */
+    }
 }

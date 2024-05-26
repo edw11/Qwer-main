@@ -124,7 +124,6 @@ app.post("/confirm", async (req, res) => {
         const history = await db.query("INSERT INTO history (room, seat_number, start_time, end_time, status, user_id) VALUES ($1, $2, $3, $4, $5, $6)", [room, req.body.seatNumber, startTimeFinal, endTimeFinal, userStatus, user]);
         const timeBooked = await db.query(`UPDATE q_user SET timebook = $1 WHERE id = $2`, [tempTime, user]);
         const isBooked = await db.query(`UPDATE q_user SET is_booked = $1 WHERE id=$2`, [status, user]) //for checking user reservation
-
         // Start the async function to update status to "Complete"
         updateStatusToComplete();
 
